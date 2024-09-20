@@ -1,0 +1,79 @@
+<odoo>
+      <record id="sale_order_view_inherit_pix" model="ir.ui.view">
+        <field name="name">sale.order.view.inherit.pix</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree/field[@name='activity_ids']" position="before">
+                  <field name="ddt_sale_color" invisible="1"/>
+                  <field name="invoice_sale_color" invisible="1"/>
+                  <field name="ddt_date_invoice" invisible="1"/>
+                  <field name="delivery_note_ids" optional="show" widget="many2many_tags_ddt" options="{'color_field': 'ddt_sale_color'}"/>
+                  <field name="related_delivery_notes" widget='many2many_tags'/>
+                  <field name="invoice_ids" optional="show" widget="many2many_tags_invoice" options="{'color_field': 'invoice_sale_color'}"/>
+            </xpath>
+        </field>
+        </record>
+    
+        <record id="sale_order_view_inherit_sale_pix" model="ir.ui.view">
+          <field name="name">sale.order.view.inherit.sale.pix</field>
+          <field name="model">sale.order</field>
+          <field name="inherit_id" ref="sale.view_order_tree"/>
+          <field name="arch" type="xml">
+              <xpath expr="//tree/field[@name='partner_id']" position="before">
+                    <field name="ddt_sale_color" invisible="1"/>
+                    <field name="invoice_sale_color" invisible="1"/>
+                    <field name="ddt_date_invoice" invisible="1"/>
+                    <field name="delivery_note_ids" optional="show" widget="many2many_tags_ddt" options="{'color_field': 'ddt_sale_color'}"/>
+                    <field name="invoice_ids" optional="show" widget="many2many_tags_invoice" options="{'color_field': 'invoice_sale_color'}"/>
+              </xpath>
+          </field>
+          </record>
+
+          <record id="stock_delivery_note_form_pix_inherit" model="ir.ui.view">
+            <field name="name">stock.delivery.note.form.pix.inherit</field>
+            <field name="model">stock.delivery.note</field>
+            <field name="inherit_id" ref="l10n_it_delivery_note.stock_delivery_note_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='date']" position="after">
+                      <field name="container"/>
+                        <field name="partner_shipping_ddt" />
+                </xpath>
+            </field>
+            </record>
+
+          <record id="stock_delivery_note_form_pix_inherit_wizard" model="ir.ui.view">
+            <field name="name">stock.delivery.note2.create.form</field>
+            <field name="model">stock.delivery.note.create.wizard</field>
+            <field name="inherit_id" ref="l10n_it_delivery_note.stock_delivery_note_create_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_shipping_id']" position="after">
+                      <field name="partner_shipping_ddt" context="{'default_partner_id': partner_id}" />
+                </xpath>
+            </field>
+            </record>
+
+            <record id="sale_order_form_view_inherit_sale_pix" model="ir.ui.view">
+                  <field name="name">sale.order.form.view.inherit.sale.pix</field>
+                  <field name="model">sale.order</field>
+                  <field name="inherit_id" ref="sale.view_order_form"/>
+                  <field name="arch" type="xml">
+                        <xpath expr="//label[@for='commitment_date']" position="replace">
+                              <label for="commitment_date" string="Data prevista consegna"/>
+                        </xpath>
+                  </field>
+                  </record>
+
+                  <record id="stock_picking_form_pix" model="ir.ui.view">
+                        <field name="name">stock.picking.form.pix</field>
+                        <field name="model">stock.picking</field>
+                        <field name="inherit_id" ref="l10n_it_delivery_note.stock_picking_form_view"/>
+                        <field name="arch" type="xml">
+                              <xpath expr="//field[@name='transport_reason_id']" position="after">
+                                    <field name="container" attrs="{'readonly': [('delivery_note_readonly', '=', True)]}"/>
+                              </xpath>
+                        </field>
+                        </record>
+
+
+    </odoo>

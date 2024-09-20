@@ -1,0 +1,30 @@
+# Byte-compiled / optimized python files
+__pycache__/
+*.pyc
+*.pyo
+
+# Log files
+*.log
+
+# Editor backup files
+*~
+
+# Ignore .idea/ folder from PyCharm
+.idea/
+
+# Ignore .vscode/ folder from Visual Studio Code
+.vscode/
+
+# Ignore .DS_Store files on Mac
+.DS_Store
+
+# Ignore the Odoo server logs and PID file
+*.pid
+*/log/*
+
+# Ignore database file
+*.sql
+
+# Ignore backup files
+*.*~
+*.bak

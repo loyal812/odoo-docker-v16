@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Aggiunge la colonna codice fornitore nel pdf del preventivo -->
+    <template id="cod_suppl_report_saleorder_document"  inherit_id="sale.report_saleorder_document">
+            
+            <xpath expr="//th[@name='th_description']" position="after">
+              <th name="th_code_supplier" class="text-left">Cod.prod</th>
+              
+            </xpath>
+            
+            <xpath expr="//td[@name='td_name']" position="after">
+              <td name="td_code_supplier">
+                <span t-field="line.code_supplier"/>
+                </td>
+              
+            </xpath>
+
+    </template>
+    <!-- Aggiunge colonna codice fornitore al pdf della DiBa -->
+    <template inherit_id="mrp.report_mrp_bom" id="inherit_report_mrp_bom">
+          <xpath expr="//table//tr/th[1]" position="before">
+            <th name="th_code_supplier" class="text-left">Cod.prod&#160;&#160;</th>
+          </xpath>
+         <xpath expr="//table//tr/td[1]" position="before">
+             <td>
+                <span t-esc="data['code_supplier']"/>
+            </td>
+          </xpath>
+        <!-- <xpath expr="//table/tfoot/tr/td[3]" position="after">
+            <td><div style="margin-left:30px;"/></td>
+        </xpath> -->
+
+
+    </template>
+    <template inherit_id="mrp.report_mrp_bom_pdf_line" id="inherit_report_mrp_bom_pdf_line">
+        <xpath expr="//tr/td[1]" position="before">
+            <td name="td_mrp_code_supplier">
+                <div style="space_td">
+                    <div><t  t-esc="l['code_supplier']" /></div>
+                  </div>
+            </td>
+        </xpath>
+    </template>
+    <!-- <template inherit_id="mrp.report_mrp_bom_line" id="inherit_report_mrp_bom_line">
+        <xpath expr="//tr/td[1]" position="before">
+            <td>
+                <t t-if="l['code_supplier']">
+                    <div t-att-style="space_td">
+                        <t t-esc="l['code_supplier']"/>
+                    </div>
+                </t>
+                <t t-else="">
+                    <div t-att-style="'margin-left:30px;'"/>
+                </t>
+            </td>
+        </xpath>
+    </template> -->
+
+</odoo>

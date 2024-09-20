@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="sale_order_precision_document_inherit" inherit_id="sale.report_saleorder_document">
+  <xpath expr="//span[@t-field='line.price_unit']" position="attributes">
+    <attribute name="t-options">{"widget": "float","precision": 2}</attribute>
+  </xpath>
+</template>
+  
+
+</odoo>
